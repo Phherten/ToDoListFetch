@@ -41,7 +41,10 @@ const Home = () => {
 						/>
 						<button
 							className="agregarTarea"
-							onClick={() => addNuevaTarea([...tareas, tarea])}>
+							onClick={() => {
+								addNuevaTarea([...tareas, tarea]);
+								addTarea("");
+							}}>
 							<i class="fas fa-plus-circle"></i>
 						</button>
 					</div>
