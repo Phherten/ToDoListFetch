@@ -7,15 +7,25 @@ const Home = () => {
 	useEffect(() => {
 		console.log(tareas);
 	}, [tareas]);
-	const arrayTareas = tareas.map((tareaIndividual, i) => {
+	const borrar = (index) => {
+		//console.log("esto es el indice" + indice);
+		let newArray = tareas.filter((valor, indice) => indice != index);
+
+		addNuevaTarea(newArray);
+	};
+
+	const arrayTareas = tareas.map((tareaIndividual, index) => {
 		return (
 			<div
+				key={index}
 				className="d-flex justify-content-between pb-2 ps-3"
 				id="lineaTarea">
 				{tareaIndividual}
-
-				<button className="borrar" id="papelera">
-					<i class="fas fa-trash"></i>
+				<button
+					className="borrar"
+					id="papelera"
+					onClick={() => borrar(index)}>
+					<i className="fas fa-trash"></i>
 				</button>
 			</div>
 		);
@@ -32,7 +42,7 @@ const Home = () => {
 					<div className="lineaInput d-flex justify-content-between">
 						<input
 							type="text"
-							class="form-control-lg border-0"
+							className="form-control-lg border-0"
 							placeholder="introduce tarea"
 							id="tarea"
 							onChange={(e) => addTarea(e.target.value)}
@@ -45,7 +55,7 @@ const Home = () => {
 								addNuevaTarea([...tareas, tarea]);
 								addTarea("");
 							}}>
-							<i class="fas fa-plus-circle"></i>
+							<i className="fas fa-plus-circle"></i>
 						</button>
 					</div>
 					<div className="texto">{arrayTareas}</div>
