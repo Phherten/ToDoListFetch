@@ -52,7 +52,9 @@ const Home = () => {
 						<button
 							className="agregarTarea"
 							onClick={() => {
-								addNuevaTarea([...tareas, tarea]);
+								tarea
+									? addNuevaTarea([...tareas, tarea])
+									: alert("introduce tarea");
 								addTarea("");
 							}}>
 							<i className="fas fa-plus-circle"></i>
