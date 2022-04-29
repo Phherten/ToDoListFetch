@@ -60,7 +60,10 @@ const Home = () => {
 							className="agregarTarea"
 							onClick={() => {
 								tarea
-									? addNuevaTarea([...tareas, tarea])
+									? addNuevaTarea([
+											...tareas,
+											{ label: tarea, done: false },
+									  ])
 									: alert("introduce tarea");
 								addTarea("");
 							}}>
