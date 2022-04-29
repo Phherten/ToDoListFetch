@@ -51,8 +51,8 @@ const Home = () => {
 
 		addNuevaTarea(newArray);
 	};
-
-	const arrayTareas = tareas.map((tareaIndividual, index) => {
+	const arraySinSt = tareas.filter((valor, indice) => indice != 0);
+	const arrayTareas = arraySinSt.map((tareaIndividual, index) => {
 		return (
 			<div
 				key={index}
