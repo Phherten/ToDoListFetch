@@ -2,17 +2,48 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Home = () => {
+	const [tarea, addTarea] = useState("");
+	const [tareas, addNuevaTarea] = useState([]);
+
+	useEffect(() => {
+		grabarDatos();
+	}, [tareas]);
+
+	useEffect(() => {
+		conseguirDatos();
+	}, []);
+
+	function grabarDatos() {
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		var raw = JSON.stringify(tareas);
+
+		var requestOptions = {
+			method: "PUT",
+			headers: myHeaders,
+			redirect: "follow",
+			body: raw,
+		};
+
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/phherten",
+			requestOptions
+		)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log(result);
+				//conseguirDatos();
+			})
+			.catch((error) => console.log("error", error));
+	}
+
 	function conseguirDatos() {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/phherten")
 			.then((response) => response.json())
 			.then((result) => addNuevaTarea(result))
 			.catch((error) => console.log("error", error));
 	}
-	const [tarea, addTarea] = useState("");
-	const [tareas, addNuevaTarea] = useState([]);
-	useEffect(() => {
-		conseguirDatos();
-	}, []);
 
 	const borrar = (index) => {
 		//console.log("esto es el indice" + indice);
