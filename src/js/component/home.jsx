@@ -2,11 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Home = () => {
+	function conseguirDatos() {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/phherten")
+			.then((response) => response.json())
+			.then((result) => addNuevaTarea(result))
+			.catch((error) => console.log("error", error));
+	}
 	const [tarea, addTarea] = useState("");
 	const [tareas, addNuevaTarea] = useState([]);
 	useEffect(() => {
-		console.log(tareas);
-	}, [tareas]);
+		conseguirDatos();
+	}, []);
+
 	const borrar = (index) => {
 		//console.log("esto es el indice" + indice);
 		let newArray = tareas.filter((valor, indice) => indice != index);
@@ -20,7 +27,7 @@ const Home = () => {
 				key={index}
 				className="d-flex justify-content-between pb-2 ps-3"
 				id="lineaTarea">
-				{tareaIndividual}
+				{tareaIndividual.label}
 				<button
 					className="borrar"
 					id="papelera"
