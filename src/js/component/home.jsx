@@ -47,7 +47,7 @@ const Home = () => {
 
 	const borrar = (index) => {
 		//console.log("esto es el indice" + indice);
-		let newArray = tareas.filter((valor, indice) => indice != index);
+		let newArray = tareas.filter((valor, indice) => indice != index + 1);
 
 		addNuevaTarea(newArray);
 	};
